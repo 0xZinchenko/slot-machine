@@ -17,7 +17,19 @@ public class App {
         System.out.println("-------------------------");
 
         while (balance > 0) {
+            System.out.println("Current balance: $" + balance);
+            System.out.print("Place your bet amount: ");
+            bet = scanner.nextInt();
             
+            if (bet > balance) {
+                System.out.println("INSUFFICIENT FUNDS");
+                continue;
+            } else if (bet <= 0) {
+                System.out.println("Bet must be greater than 0");
+                continue;
+            } else {
+                balance -= bet;
+            }
         }
 
         scanner.close();
