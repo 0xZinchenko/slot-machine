@@ -11,6 +11,7 @@ public class App {
         int bet;
         int payout;
         String[] row;
+        String playAgain;
 
         System.out.println("-------------------------");
         System.out.println("  Welcome to Java Slots  ");
@@ -21,6 +22,7 @@ public class App {
             System.out.println("Current balance: $" + balance);
             System.out.print("Place your bet amount: ");
             bet = scanner.nextInt();
+            scanner.nextLine();
 
             if (bet > balance) {
                 System.out.println("INSUFFICIENT FUNDS");
@@ -43,7 +45,15 @@ public class App {
             } else {
                 System.out.println("Sorry you lost this round");
             }
+
+            System.out.print("Do you want to play again? (Y/N): ");
+            playAgain = scanner.nextLine().toUpperCase();
+            if (!playAgain.equals("Y")) {
+                break;
+            }
         }
+
+        System.out.println("GAME OVER! Your final balance is $" + balance);
 
         scanner.close();
     }
