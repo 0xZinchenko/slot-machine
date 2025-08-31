@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class App {
@@ -20,7 +21,7 @@ public class App {
             System.out.println("Current balance: $" + balance);
             System.out.print("Place your bet amount: ");
             bet = scanner.nextInt();
-            
+
             if (bet > balance) {
                 System.out.println("INSUFFICIENT FUNDS");
                 continue;
@@ -30,8 +31,23 @@ public class App {
             } else {
                 balance -= bet;
             }
+
+            System.out.println("Spinning...");
+            row = spinRow();
         }
 
         scanner.close();
+    }
+
+    static String[] spinRow() {
+        String[] symbols = {"🍒", "🍉", "🍋", "🔔", "⭐"};
+        String[] row = new String[3];
+        Random random = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            row[i] = symbols[random.nextInt(symbols.length)];
+        }
+
+        return row;
     }
 }
