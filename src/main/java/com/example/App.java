@@ -22,7 +22,7 @@ public class App {
             System.out.println("Current balance: $" + balance);
             System.out.print("Place your bet amount: ");
             bet = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine();  // consume newline
 
             if (bet > balance) {
                 System.out.println("INSUFFICIENT FUNDS");
@@ -58,6 +58,9 @@ public class App {
         scanner.close();
     }
 
+    /**
+     * Spins the slot machine and returns an array of 3 random symbols.
+     */
     static String[] spinRow() {
         String[] symbols = {"🍒", "🍉", "🍋", "🔔", "⭐"};
         String[] row = new String[3];
@@ -69,14 +72,27 @@ public class App {
 
         return row;
     }
+
+    /**
+     * Prints the resulting row of symbols.
+     */
     static void printRow(String[] row) {
         System.out.println("-------------------------");
         System.out.println(" " + String.join(" | ", row));
         System.out.println("-------------------------");
     }
+
+    /**
+     * Calculates the payout based on the result and the bet.
+     *
+     * @param row the array of 3 symbols
+     * @param bet the bet amount
+     * @return the payout amount
+     */
     static int getPayout(String[] row, int bet) {
+        // All three symbols match
         if (row[0].equals(row[1]) && row[1].equals(row[2])) {
-            return switch(row[0]) {
+            return switch (row[0]) {
                 case "🍒" -> bet * 3;
                 case "🍉" -> bet * 4;
                 case "🍋" -> bet * 5;
@@ -84,8 +100,9 @@ public class App {
                 case "⭐" -> bet * 20;
                 default -> 0;
             };
+            // First two symbols match
         } else if (row[0].equals(row[1])) {
-            return switch(row[0]) {
+            return switch (row[0]) {
                 case "🍒" -> bet * 2;
                 case "🍉" -> bet * 3;
                 case "🍋" -> bet * 4;
@@ -93,8 +110,9 @@ public class App {
                 case "⭐" -> bet * 10;
                 default -> 0;
             };
+            // Last two symbols match
         } else if (row[1].equals(row[2])) {
-            return switch(row[1]) {
+            return switch (row[1]) {
                 case "🍒" -> bet * 2;
                 case "🍉" -> bet * 3;
                 case "🍋" -> bet * 4;
@@ -103,6 +121,7 @@ public class App {
                 default -> 0;
             };
         }
+        // No match
         return 0;
     }
 }
